@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { DisplayLcd } from '../display-lcd/display-lcd';
 
 @Component({
@@ -57,6 +57,30 @@ export class Calculator {
       this.storedValue.set(null);
       this.lastOp.set(null);
       this.waitingNext.set(true);
+    }
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    const key = event.key;
+
+    if (/[0-9.]/.test(key)) {
+      this.handlePress(key);
+    } else if (key === '+') {
+      this.handlePress('+');
+    } else if (key === '-') {
+      this.handlePress('-');
+    } else if (key === '*') {
+      this.handlePress('x');
+    } else if (key === '/') {
+      event.preventDefault(); 
+      this.handlePress('÷');
+    } else if (key === 'Enter' || key === '=') {
+      this.handlePress('=');
+    } else if (key === 'Escape' || key === 'Delete') {
+      this.resetDisplay();
+    } else if (key === 'Backspace') {
+      this.myDisplay.update(v => v.length > 1 ? v.slice(0, -1) : '0');
     }
   }
 }
