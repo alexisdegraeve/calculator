@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './calculator.scss',
 })
 export class Calculator {
-    boutons = Array.from({ length: 10 }, (_, i) => i);
+  boutons = [
+    7, 8, 9,
+    4, 5, 6,
+    1, 2, 3,
+    0, '.', '='
+  ];
 }
