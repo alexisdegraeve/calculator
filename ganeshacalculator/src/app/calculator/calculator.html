@@ -2,11 +2,11 @@
     <div class="buttons">
         @for (num of boutons; track num) {
         <div class="shadow-button">
-            <button type="button" class="btn btn-primary btn-lg">{{ num }}</button>
+            <button type="button" class="btn btn-primary btn-lg"><span  [class.btn-minus]="num === '-'">{{ num }}</span></button>
         </div>
         }
         <div class="shadow-button btn-clear-parent">
-            <button type="button" class="btn btn-danger btn-lg btn-clear">C</button>
+            <button type="button" class="btn btn-danger btn-lg">C</button>
         </div>
     </div>
 </div>
