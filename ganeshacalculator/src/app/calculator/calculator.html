@@ -5,7 +5,7 @@
     <div class="buttons">
         @for (num of boutons; track num) {
         <div class="shadow-button">
-            <button type="button" class="btn btn-primary btn-lg"><span  [class.btn-minus]="num === '-'">{{ num }}</span></button>
+            <button type="button" class="btn btn-primary btn-lg" (click)="handlePress(num)"><span  [class.btn-minus]="num === '-'">{{ num }}</span></button>
         </div>
         }
         <div class="shadow-button btn-clear-parent">

@@ -14,11 +14,30 @@ export class Calculator {
     1, 2, 3,'-',
     0, '.', '=','+'
   ];
-  myDisplay = signal('1111111111111111111111111111111');
+  myDisplay = signal('0');
+
+  handlePress(val: string | number) {
+  const valueAsString = val.toString(); 
+
+  if (valueAsString === 'C') return this.resetDisplay();
+
+  if (valueAsString === '=') {
+    this.calculate();
+  } else {
+    this.myDisplay.update(current => 
+      current === '0' ? valueAsString : current + valueAsString
+    );
+  }
+  }
+
   setMyDisplay() {
     this.myDisplay.set('2');
   }
   resetDisplay() {
     this.myDisplay.set('0');
+  }
+
+  private calculate() {
+    console.log('Calculate :', this.myDisplay());
   }
 }
