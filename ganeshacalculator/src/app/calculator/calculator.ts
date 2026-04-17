@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { DisplayLcd } from '../display-lcd/display-lcd';
 
 @Component({
   selector: 'app-calculator',
-  imports: [],
+  imports: [DisplayLcd],
   templateUrl: './calculator.html',
   styleUrl: './calculator.scss',
 })
@@ -13,4 +14,11 @@ export class Calculator {
     1, 2, 3,'-',
     0, '.', '=','+'
   ];
+  myDisplay = signal('1');
+  setMyDisplay() {
+    this.myDisplay.set('2');
+  }
+  resetDisplay() {
+    this.myDisplay.set('0');
+  }
 }
