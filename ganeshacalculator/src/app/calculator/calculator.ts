@@ -14,7 +14,7 @@ export class Calculator {
     1, 2, 3,'-',
     0, '.', '=','+'
   ];
-  myDisplay = signal('1');
+  myDisplay = signal('1111111111111111111111111111111');
   setMyDisplay() {
     this.myDisplay.set('2');
   }
