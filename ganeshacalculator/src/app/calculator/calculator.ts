@@ -8,36 +8,55 @@ import { DisplayLcd } from '../display-lcd/display-lcd';
   styleUrl: './calculator.scss',
 })
 export class Calculator {
-  boutons = [
-    7, 8, 9,'÷',
-    4, 5, 6,'x',
-    1, 2, 3,'-',
-    0, '.', '=','+'
-  ];
+  boutons = [7, 8, 9, '÷', 4, 5, 6, 'x', 1, 2, 3, '-', 0, '.', '=', '+'];
   myDisplay = signal('0');
+  storedValue = signal<number | null>(null);
+  lastOp = signal<string | null>(null);
+  waitingNext = signal(false);
 
   handlePress(val: string | number) {
-  const valueAsString = val.toString(); 
+    const valueAsString = val.toString();
 
-  if (valueAsString === 'C') return this.resetDisplay();
+    if (valueAsString === '=') {
+      this.calculate();
+    } else if (['+', '-', 'x', '÷'].includes(valueAsString)) {
+      this.storedValue.set(parseFloat(this.myDisplay()));
+      this.lastOp.set(valueAsString);
+      this.waitingNext.set(true);
+    } else {
+      this.myDisplay.update((current) => {
+        if (current === '0' || this.waitingNext()) {
+          this.waitingNext.set(false);
+          return valueAsString;
+        }
+        return current + valueAsString;
+      });
+    }
+  }
 
-  if (valueAsString === '=') {
-    this.calculate();
-  } else {
-    this.myDisplay.update(current => 
-      current === '0' ? valueAsString : current + valueAsString
-    );
-  }
-  }
-
-  setMyDisplay() {
-    this.myDisplay.set('2');
-  }
   resetDisplay() {
     this.myDisplay.set('0');
+    this.storedValue.set(null);
+    this.lastOp.set(null);
+    this.waitingNext.set(false);
   }
 
   private calculate() {
-    console.log('Calculate :', this.myDisplay());
+    const v1 = this.storedValue();
+    const v2 = parseFloat(this.myDisplay());
+    const op = this.lastOp();
+
+    if (v1 !== null && op) {
+      let res = 0;
+      if (op === '+') res = v1 + v2;
+      if (op === '-') res = v1 - v2;
+      if (op === 'x') res = v1 * v2;
+      if (op === '÷') res = v1 / v2;
+
+      this.myDisplay.set(res.toString());
+      this.storedValue.set(null);
+      this.lastOp.set(null);
+      this.waitingNext.set(true);
+    }
   }
 }
