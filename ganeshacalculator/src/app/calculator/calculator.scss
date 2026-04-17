@@ -4,8 +4,11 @@
     .buttons {
         max-width: 10rem;
         gap: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        flex-flow: wrap-reverse;
+        grid-auto-rows: 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+        display: grid;
+        button:first-child {
+            order: 2;
+        }
     }
 }
