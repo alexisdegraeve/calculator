@@ -1,0 +1,11 @@
+.calculator {
+    background-color: #f9f9f9;
+    display: flex;
+    .buttons {
+        max-width: 10rem;
+        gap: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-flow: wrap-reverse;
+    }
+}

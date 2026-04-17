@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './calculator.html',
   styleUrl: './calculator.scss',
 })
-export class Calculator {}
+export class Calculator {
+    boutons = Array.from({ length: 10 }, (_, i) => i);
+}
