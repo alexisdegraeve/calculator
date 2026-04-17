@@ -3,5 +3,18 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import url('https://googleapis.com');
 button {
-    font-family: 'Orbitron', sans-serif !important;
+    clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+    border-radius: 0.65rem !important;
+    &.btn-primary {
+        background-color: #3949a5 !important;
+        &:hover {
+            background-color: #7581c7 !important;
+        }
+    }
+    &.btn-danger {
+        background-color: #da5c69 !important;
+        &:hover {
+            background-color: #d3838b !important;
+        }
+    }
 }

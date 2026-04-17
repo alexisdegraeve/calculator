@@ -5,11 +5,24 @@
         max-width: 10rem;
         gap: 1rem;
         grid-auto-rows: 1fr;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         display: grid;
         button {
-            clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);
-            border-radius: 0.75rem;
+            width: 3.5rem;
+            font-family: 'Michroma' !important;
+            font-weight: bold !important;
+            padding: 0;
+            font-size: 2rem;
+            &.btn-clear {
+                width: 100%;
+                clip-path: polygon(0% 0%, 100% 0%, 98% 100%, 2% 100%);
+            }
+        }
+    }
+    .shadow-button {
+        filter: drop-shadow(3px 3px 0px black);
+        &.btn-clear-parent {
+            grid-column: span 4;
         }
     }
 }
